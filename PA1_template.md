@@ -73,21 +73,13 @@ averaged across all days (y-axis)
 
 
 
-```r
-hist(aTotal$`Total Steps`, col = "green", xlab="total number of steps taken each day", ylab="Frequency of Total Steps", 
-     main="Histogram of the total number of steps taken each day")
-```
-
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
-
-
 
 ```r
 stepsInterval<-aggregate(steps~interval, activity, mean)
 with(stepsInterval, plot(interval, steps, type = "l", col= "blue"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -146,7 +138,7 @@ names(aTotalImputed) <- c("date","steps")
 hist(aTotalImputed$steps, xlab="Total steps per day after missing values are imputed" , col="green")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 
 
@@ -226,5 +218,5 @@ aveStepWeekdayInterval<-activityWeekdays %>%
 xyplot(aveStepWeekday ~ interval | weekDay, data = aveStepWeekdayInterval,layout = c(2, 1),  type ="l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
   

@@ -58,11 +58,6 @@ averaged across all days (y-axis)
 1. Make a time series plot(i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
 
-```{r}
-hist(aTotal$`Total Steps`, col = "green", xlab="total number of steps taken each day", ylab="Frequency of Total Steps", 
-     main="Histogram of the total number of steps taken each day")
-```
-
 
 ```{r}
 stepsInterval<-aggregate(steps~interval, activity, mean)
