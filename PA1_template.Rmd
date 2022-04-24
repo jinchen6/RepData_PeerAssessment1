@@ -21,7 +21,7 @@ For this part of the assignment, you can ignore the missing values in the datase
 Make a histogram of the total number of steps taken each day
 3. Calculate and report the mean and median of the total number of steps taken per day
 
-```{r setup, include=FALSE}
+```{r}
 knitr::opts_chunk$set(echo = TRUE)
 
 aTotal <- with(activity, aggregate(steps, by = list(date), sum))
@@ -32,7 +32,7 @@ names(aTotal)[[2]] <- "Total Steps"
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 hist(aTotal$`Total Steps`, col = "green", xlab="total number of steps taken each day", ylab="Frequency of Total Steps", 
      main="Histogram of the total number of steps taken each day")
 ```
@@ -42,18 +42,11 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 3. Calculate and report the mean and median of the total number of steps taken per day
 
 ```{r}
-library(dplyr)
-aMean <- with(activity, aggregate(steps, by = list(date), mean, na.rm = T))
-aMedian <- with(activity, aggregate(steps, by = list(date), median, na.rm = T))
-names(aMean)[[1]] <- "date"
-names(aMean)[[2]] <- "mean"
-names(aMedian)[[2]] <-  "median"
+aMean <- mean(aTotal$`Total Steps`, na.rm = T)
+aMean
 
-aMeanMedian <- cbind(aMean$date,aMean$mean,aMedian$median)
-aMeanMedian <- cbind(as.character(aMean$date),round(aMean$mean,0),aMedian$median)
-aMeanMedian <- as.data.frame(aMeanMedian)
-colnames(aMeanMedian) <-c("Date","Mean","Median")
-aMeanMedian
+aMedian <- median(aTotal$`Total Steps`, na.rm = T)
+aMedian 
 
 ```
 
@@ -65,13 +58,13 @@ averaged across all days (y-axis)
 1. Make a time series plot(i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
 
-```{r , echo=FALSE}
+```{r}
 hist(aTotal$`Total Steps`, col = "green", xlab="total number of steps taken each day", ylab="Frequency of Total Steps", 
      main="Histogram of the total number of steps taken each day")
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 stepsInterval<-aggregate(steps~interval, activity, mean)
 with(stepsInterval, plot(interval, steps, type = "l", col= "blue"))
 
@@ -97,12 +90,10 @@ you could use the mean/median for that day, or the mean for that 5-minute interv
 4. Make a histogram of the total number of steps taken each day and 
 Calculate and report the mean and median total number of steps taken per day. 
 Do these values differ from the estimates from the first part of the assignment?
-Yes.
 What is the impact of imputing missing data on the estimates of the total daily number of steps?
-NAs is replaced by the filled in value.
+
 
 Are there differences in activity patterns between weekdays and weekends?
-Yes.
 For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.
 
 ```{r}
@@ -114,7 +105,7 @@ m<-mean(stepsInterval$steps)
 
 ```
 
-```{r, echo=FALSE}
+```{r}
 
 activityImputed<-activity
 activityImputed[missingValues,1]<-m
@@ -126,18 +117,12 @@ hist(aTotalImputed$steps, xlab="Total steps per day after missing values are imp
 ```
 
 
-```{r , echo=FALSE}
-aMean <- with(activityImputed, aggregate(steps, by = list(date), mean, na.rm = T))
-aMedian <- with(activityImputed, aggregate(steps, by = list(date), median, na.rm = T))
-names(aMean)[[1]] <- "date"
-names(aMean)[[2]] <- "mean"
-names(aMedian)[[2]] <-  "median"
+```{r}
+aMean <- mean(aTotal$`Total Steps`, na.rm = T)
+aMean
 
-aMeanMedian <- cbind(aMean$date,aMean$mean,aMedian$median)
-aMeanMedian <- cbind(as.character(aMean$date),round(aMean$mean,0),round(aMedian$median))
-aMeanMedian <- as.data.frame(aMeanMedian)
-colnames(aMeanMedian) <-c("Date","Mean","Median")
-aMeanMedian
+aMedian <- median(aTotal$`Total Steps`, na.rm = T)
+aMedian 
 
 ```
 
@@ -151,7 +136,7 @@ should look like using simulated data.
 
 
 
-```{r, echo=FALSE}
+```{r}
 library(dplyr)
 library(lattice)
 
