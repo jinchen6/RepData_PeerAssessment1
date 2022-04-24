@@ -113,10 +113,10 @@ hist(aTotalImputed$steps, xlab="Total steps per day after missing values are imp
 
 
 ```{r}
-aMean <- mean(aTotal$`Total Steps`, na.rm = T)
+aMean <- mean(aTotalImputed$`steps`, na.rm = T)
 aMean
 
-aMedian <- median(aTotal$`Total Steps`, na.rm = T)
+aMedian <- median(aTotalImputed$`steps`, na.rm = T)
 aMedian 
 
 ```
